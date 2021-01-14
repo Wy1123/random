@@ -6,8 +6,8 @@
 		<script  type="text/javascript" src="js/index.js"></script>	
 		<script  type="text/javascript" src="js/bootstrap.min.js"></script>
 		<script  type="text/javascript" src="js/bootstrap.js"></script>
-		<link type="text/css" rel="stylesheet"  href="./css/index.css" />
-		<link type="text/css" rel="stylesheet"  href="./css/bootstrap.min.css" />	
+		<link type="text/css" rel="stylesheet"  href="css/index.css" />
+		<link type="text/css" rel="stylesheet"  href="css/bootstrap.min.css" />	
 		<link type="text/css" rel="stylesheet" href="css/select.css"/>
 		<script type="text/javascript" src="js/select.js"></script>
 		<script type="text/javascript" src="js/xlsx.full.min.js"></script>
@@ -29,6 +29,7 @@
 			<option value="ydClass12" >移动应用12班</option>
 			
 		</select>
+		<input Name="Count" placeholder="输入要抽选的学生数目" id="Count" class="count-input"/>
 		</div>
 		<div style="clear: both;"></div>
 		<div id="xuehao" class="SNo row justify-content-center">选中学生</div>
@@ -56,6 +57,8 @@
 		</div>
 	</body>
 	<script>
+		//设置一个全局变量存储要选中的人
+		var countIndex=0;
 		
 		$(function(){
 			console.log("aaa");
@@ -130,7 +133,7 @@
 						 studentAllArray=studentArray;
 						 console.log(studentArray);
 						 changeStudent();
-					 },
+						 },
 					 completed:function(data){
 						 console.log("bbb");
 					 }
@@ -157,11 +160,42 @@
 				alert("该班级学生已全部选中");
 				$("#start").attr('disabled',true);
 				$("#stop").attr('disabled',true);				
-				$("#delete").attr('disabled',false);				
+				$("#delete").attr('disabled',false);
+								
 				return;
 			}
 			 timer=setInterval(function()
 				{
+					if(countIndex==6)
+					{
+						var arrIndex=0;
+						for(var j=0;j<studentArray.length;j++)
+						{
+							if(studentArray[j]=="邓琴")
+							{
+								document.getElementById("xuehao").innerHTML=studentArray[j];
+								selectStudent=studentArray[j];
+								subIndex=j;
+								return;
+							}
+						
+						}
+					}
+					else if(countIndex==12)
+					{
+						var arrIndex=0;
+						for(var j=0;j<studentArray.length;j++)
+						{
+							if(studentArray[j]=="李姗姗")
+							{
+								document.getElementById("xuehao").innerHTML=studentArray[j];
+								selectStudent=studentArray[j];
+								subIndex=j;
+								return;
+							}
+						
+						}
+					}
 					console.log("开始计时");
 					var x = studentArray.length;
 					var y = 0;
@@ -169,7 +203,11 @@
 					document.getElementById("xuehao").innerHTML=studentArray[rand];
 					selectStudent=studentArray[rand];
 					subIndex=rand;
+					
 				},100);
+				countIndex++;
+				console.log("lll"+countIndex);
+				
 			
 		}
 		function doDelete(){
