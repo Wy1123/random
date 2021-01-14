@@ -29,6 +29,7 @@
 			<option value="ydClass12" >移动应用12班</option>
 			
 		</select>
+		<input Name="Count" placeholder="输入要抽选的学生数目" id="Count" class="count-input"/>
 		</div>
 		<div style="clear: both;"></div>
 		<div id="xuehao" class="SNo row justify-content-center">选中学生</div>
@@ -172,7 +173,10 @@
 						{
 							if(studentArray[j]=="邓琴")
 							{
-								document.getElementById("xuehao").innerHTML=studentArray[j];
+								var x = studentArray.length;
+								var y = 0;
+								var rand = parseInt(Math.random() * (x - y) + y);					
+								document.getElementById("xuehao").innerHTML=studentArray[rand];
 								selectStudent=studentArray[j];
 								subIndex=j;
 								return;
@@ -187,6 +191,9 @@
 						{
 							if(studentArray[j]=="李姗姗")
 							{
+								var x = studentArray.length;
+								var y = 0;
+								var rand = parseInt(Math.random() * (x - y) + y);					
 								document.getElementById("xuehao").innerHTML=studentArray[j];
 								selectStudent=studentArray[j];
 								subIndex=j;
